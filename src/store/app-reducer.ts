@@ -1,6 +1,6 @@
-import {authAPI} from "../api/todolists-api";
+import {authAPI} from "../api/auth-api";
 import {Dispatch} from "redux";
-import {setIsLoggedInAC} from "../features/login/login-reducer";
+import {setIsLoggedInAC} from "../store/login-reducer";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
 
 const initialState: InitialStateType = {
