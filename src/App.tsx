@@ -14,15 +14,9 @@ export type ThemeType = "dark"|"light"
 function App() {
   const [mode, setMode] = useState<ThemeType>("light");
 
-  const thisTheme = createTheme({
-    palette: {
-      mode: mode,
-    },
-  });
+
   return (
-      <ThemeProvider theme={thisTheme}>
-        <Box bgcolor={"background.default"} color={"text.primary"}>
-          <Navbar />
+
 
           <Routes>
             <Route path={"/"} element={<MainPage setMode={setMode} mode={mode}/>}/>
@@ -36,8 +30,7 @@ function App() {
 
 
 
-        </Box>
-      </ThemeProvider>
+
   );
 }
 
@@ -48,12 +41,22 @@ type MainPagePropsType = {
 }
 
 export function MainPage(props:MainPagePropsType){
+  const thisTheme = createTheme({
+    palette: {
+      mode: props.mode,
+    },
+  });
   return(
-  <Stack direction="row" spacing={2} justifyContent="space-between">
+      <ThemeProvider theme={thisTheme}>
+        <Box bgcolor={"background.default"} color={"text.primary"}>
+          <Navbar />
+      <Stack direction="row" spacing={2} justifyContent="space-between">
     <Sidebar setMode={props.setMode} mode={props.mode}/>
     <Feed />
     <Rightbar />
     <Add />
   </Stack>
+        </Box>
+      </ThemeProvider>
   )
 }
