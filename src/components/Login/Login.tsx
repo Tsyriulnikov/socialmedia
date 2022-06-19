@@ -16,6 +16,8 @@ import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
 import {loginTC} from "../../store/login-reducer";
 import {LoginParamsType} from "../../api/auth-api";
+import {AppDispatch} from "../../store/store";
+import {useAppDispatch} from "../../store/hooks";
 
 export function Copyright(props: any) {
     return (
@@ -40,7 +42,9 @@ type FormikErrorType = {
 }
 
 export function Login() {
-    const dispatch = useDispatch()
+    // const dispatch = useDispatch()
+    // const count = useAppSelector(state => state.counter.value)
+    const dispatch = useAppDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',

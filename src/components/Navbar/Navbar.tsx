@@ -16,6 +16,7 @@ import {Mail, Pets, Notifications} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logoutTC} from "../../store/app-reducer";
+import {useAppDispatch} from "../../store/hooks";
 
 const StyledToolbar = styled(Toolbar)({
     display: "flex",
@@ -48,8 +49,7 @@ const UserBox = styled(Box)(({theme}) => ({
 }));
 
 export default function Navbar() {
-    const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {

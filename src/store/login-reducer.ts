@@ -7,6 +7,7 @@ import {
 } from '../store/app-reducer'
 import {authAPI, LoginParamsType} from "../api/auth-api";
 import {handleServerAppError, handleServerNetworkError} from "../utils/error-utils";
+import {AppDispatch} from "./store";
 
 const initialState = {
     isLoggedIn: false
@@ -26,7 +27,8 @@ export const setIsLoggedInAC = (value: boolean) =>
     ({type: 'login/SET-IS-LOGGED-IN', value} as const)
 
 // thunks
-export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
+// export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
+export const loginTC = (data: LoginParamsType) => (dispatch:AppDispatch) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then(res=>{
