@@ -7,6 +7,7 @@ import Add from "./components/Add/Add";
 import { useState } from "react";
 import {Routes, Route, Navigate} from 'react-router-dom'
 import {Login} from "./components/Login/Login";
+import Error404 from "./Page-not-found/Error404";
 
 
 export type ThemeType = "dark"|"light"
@@ -21,16 +22,9 @@ function App() {
           <Routes>
             <Route path={"/"} element={<MainPage setMode={setMode} mode={mode}/>}/>
             <Route path={"login"} element={<Login/>}/>
-            {/*/!*<Route path="/404" element={<h1>404: PAGE NOT FOUND</h1>}/>*!/*/}
-            {/*<Route path={'/404'} element={<Error404/>}/>*/}
-            {/*<Route path={'*'} element={<Navigate to="/404"/>}/>*/}
+            <Route path={'/404'} element={<Error404/>}/>
+            <Route path={'*'} element={<Navigate to="/404"/>}/>
           </Routes>
-
-
-
-
-
-
   );
 }
 

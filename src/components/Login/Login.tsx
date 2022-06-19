@@ -11,8 +11,11 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {createTheme} from '@mui/material/styles';
 import {useFormik} from "formik";
+import {useDispatch} from "react-redux";
+import {loginTC} from "../../store/login-reducer";
+import {LoginParamsType} from "../../api/auth-api";
 
 export function Copyright(props: any) {
     return (
@@ -27,7 +30,7 @@ export function Copyright(props: any) {
     );
 }
 
-const theme = createTheme();
+// const theme = createTheme();
 
 //component Login
 type FormikErrorType = {
@@ -37,7 +40,7 @@ type FormikErrorType = {
 }
 
 export function Login() {
-
+    const dispatch = useDispatch()
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -67,8 +70,8 @@ export function Login() {
             return errors;
         },
         onSubmit: values => {
-            alert(JSON.stringify(values));
-            // dispatch(loginTC(values))
+            // alert(JSON.stringify(values));
+            dispatch(loginTC(values) as any)
             formik.resetForm()
         },
     })
@@ -101,8 +104,8 @@ export function Login() {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
-                {/*<form onSubmit={formik.handleSubmit}>*/}
-                    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>
+                <form onSubmit={formik.handleSubmit}>
+                {/*    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>*/}
                     <TextField
                         margin="normal"
                         required
@@ -152,9 +155,9 @@ export function Login() {
                             </Link>
                         </Grid>
                     </Grid>
-                {/*</form>*/}
+                </form>
             </Box>
-            </Box>
+            {/*</Box>*/}
 
             <Copyright sx={{mt: 8, mb: 4}}/>
 

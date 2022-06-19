@@ -1,4 +1,4 @@
-import {Dispatch} from "redux";
+import {AnyAction, Dispatch} from "redux";
 import {
     SetAppErrorActionType,
     setAppStatusAC,
