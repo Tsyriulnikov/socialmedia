@@ -77,7 +77,7 @@ export const logoutTC = () => (dispatch: Dispatch<ActionsType>) => {
         })
 }
 
-type ActionsType =
+export type ActionsType =
     | SetAppErrorActionType
     | SetAppStatusActionType
     | SetInitializedActionType

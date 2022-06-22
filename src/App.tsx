@@ -1,20 +1,31 @@
 import Sidebar from "./components/Sidebar/Sidebar";
 import Feed from "./components/Feed/Feed";
 import Rightbar from "./components/Rightbar/Rightbar";
-import {Box, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
+import {Box, CircularProgress, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Add from "./components/Add/Add";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import {Routes, Route, Navigate} from 'react-router-dom'
 import {Login} from "./components/Login/Login";
 import Error404 from "./Page-not-found/Error404";
+import {useAppDispatch, useAppSelector} from "./store/hooks";
+import {initializeAppTC} from "./store/app-reducer";
 
 
 export type ThemeType = "dark"|"light"
 
 function App() {
   const [mode, setMode] = useState<ThemeType>("light");
-
+    const dispatch = useAppDispatch()
+    const isInitialized = useAppSelector(state => state.app.isInitialized)
+    useEffect(()=>{dispatch(initializeAppTC() as any)},[])
+    if (!isInitialized) {
+        return (
+            <div
+                style={{position: 'fixed', top: '30%', textAlign:'center', width: '100%'}}>
+                <CircularProgress/>
+            </div>)
+    };
 
   return (
 

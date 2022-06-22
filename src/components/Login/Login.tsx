@@ -18,6 +18,8 @@ import {loginTC} from "../../store/login-reducer";
 import {LoginParamsType} from "../../api/auth-api";
 import {AppDispatch} from "../../store/store";
 import {useAppDispatch} from "../../store/hooks";
+import {ActionsType} from "../../store/app-reducer";
+import {Dispatch} from "redux";
 
 export function Copyright(props: any) {
     return (

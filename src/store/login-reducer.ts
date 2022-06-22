@@ -1,5 +1,6 @@
 import {AnyAction, Dispatch} from "redux";
 import {
+    ActionsType,
     SetAppErrorActionType,
     setAppStatusAC,
     SetAppStatusActionType,
@@ -28,7 +29,7 @@ export const setIsLoggedInAC = (value: boolean) =>
 
 // thunks
 // export const loginTC = (data: LoginParamsType) => (dispatch: Dispatch<ActionsType>) => {
-export const loginTC = (data: LoginParamsType) => (dispatch:AppDispatch) => {
+export const loginTC = (data: LoginParamsType) => (dispatch:Dispatch<ActionsType>) => {
     dispatch(setAppStatusAC('loading'))
     authAPI.login(data)
         .then(res=>{
@@ -45,4 +46,4 @@ export const loginTC = (data: LoginParamsType) => (dispatch:AppDispatch) => {
 }
 
 // types
-type ActionsType = setIsLoggedInActionType | SetAppStatusActionType | SetAppErrorActionType
+// type ActionsType = setIsLoggedInActionType | SetAppStatusActionType | SetAppErrorActionType
