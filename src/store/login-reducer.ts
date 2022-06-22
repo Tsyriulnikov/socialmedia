@@ -1,6 +1,6 @@
 import {AnyAction, Dispatch} from "redux";
 import {
-    ActionsType,
+    // ActionsType,
     SetAppErrorActionType,
     setAppStatusAC,
     SetAppStatusActionType,
@@ -46,4 +46,4 @@ export const loginTC = (data: LoginParamsType) => (dispatch:Dispatch<ActionsType
 }
 
 // types
-// type ActionsType = setIsLoggedInActionType | SetAppStatusActionType | SetAppErrorActionType
+type ActionsType = setIsLoggedInActionType | SetAppStatusActionType | SetAppErrorActionType

@@ -11,15 +11,15 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import {createTheme} from '@mui/material/styles';
 import {useFormik} from "formik";
 import {useDispatch} from "react-redux";
 import {loginTC} from "../../store/login-reducer";
 import {LoginParamsType} from "../../api/auth-api";
 import {AppDispatch} from "../../store/store";
-import {useAppDispatch} from "../../store/hooks";
-import {ActionsType} from "../../store/app-reducer";
-import {Dispatch} from "redux";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {ErrorSnackbar} from "../ErrorSnackbar/ErrorSnackbar";
+import {Navigate, useNavigate} from "react-router-dom";
+import {useEffect} from "react";
 
 export function Copyright(props: any) {
     return (
@@ -47,6 +47,11 @@ export function Login() {
     // const dispatch = useDispatch()
     // const count = useAppSelector(state => state.counter.value)
     const dispatch = useAppDispatch()
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (isLoggedIn) navigate('/')
+    },[isLoggedIn])
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -79,6 +84,7 @@ export function Login() {
             // alert(JSON.stringify(values));
             dispatch(loginTC(values) as any)
             formik.resetForm()
+            // isLoggedIn && navigate('/')
         },
     })
 
@@ -91,10 +97,10 @@ export function Login() {
     //         password: data.get('password'),
     //     });
     // };
-
+    // if (!isLoggedIn) {return <Navigate to = '/'/>};
     return (
         <Container component="main" maxWidth="xs">
-
+            <ErrorSnackbar/>
             <CssBaseline/>
             <Box
                 sx={{
@@ -111,7 +117,7 @@ export function Login() {
                     Sign in
                 </Typography>
                 <form onSubmit={formik.handleSubmit}>
-                {/*    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>*/}
+                    {/*    <Box component="form" onSubmit={formik.handleSubmit} noValidate sx={{ mt: 1 }}>*/}
                     <TextField
                         margin="normal"
                         required
@@ -122,7 +128,8 @@ export function Login() {
                         autoFocus
                         {...formik.getFieldProps('email')}
                     />
-                    {formik.errors.email ? <div style={{color:'red', width:'400px'}}>{formik.errors.email}</div> : null}
+                    {formik.errors.email ?
+                        <div style={{color: 'red', width: '400px'}}>{formik.errors.email}</div> : null}
                     <TextField
                         margin="normal"
                         required
@@ -133,12 +140,13 @@ export function Login() {
                         autoComplete="current-password"
                         {...formik.getFieldProps('password')}
                     />
-                    {formik.errors.password ? <div style={{color:'red', width:'400px'}}>{formik.errors.password}</div> : null}
+                    {formik.errors.password ?
+                        <div style={{color: 'red', width: '400px'}}>{formik.errors.password}</div> : null}
                     <FormControlLabel
                         control={<Checkbox  {...formik.getFieldProps('rememberMe')}
                                             value="remember" color="primary"
                                             checked={formik.values.rememberMe}/>}
-                    label="Remember me"
+                        label="Remember me"
                     />
                     <Button
                         type="submit"

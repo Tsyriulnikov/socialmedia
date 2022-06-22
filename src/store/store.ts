@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore } from 'redux'
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {authReducer} from "./login-reducer";
 import {appReducer} from "./app-reducer";
@@ -9,8 +9,21 @@ const rootReducer = combineReducers({
     app: appReducer,
     login:authReducer
 })
-// непосредственно создаём store
-export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+
+//Для DEVTools  Redux
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+//
+
+
+
+// непосредственно создаём store   composeEnhancers(applyMiddleware(thunk)))
+// export const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunkMiddleware)));
 // определить автоматически тип всего объекта состояния
 export type AppRootStateType = ReturnType<typeof store.getState>
 

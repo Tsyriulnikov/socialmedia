@@ -10,6 +10,7 @@ import {Login} from "./components/Login/Login";
 import Error404 from "./Page-not-found/Error404";
 import {useAppDispatch, useAppSelector} from "./store/hooks";
 import {initializeAppTC} from "./store/app-reducer";
+import {ErrorSnackbar} from "./components/ErrorSnackbar/ErrorSnackbar";
 
 
 export type ThemeType = "dark"|"light"
@@ -29,8 +30,7 @@ function App() {
 
   return (
 
-
-          <Routes>
+            <Routes>
             <Route path={"/"} element={<MainPage setMode={setMode} mode={mode}/>}/>
             <Route path={"login"} element={<Login/>}/>
             <Route path={'/404'} element={<Error404/>}/>
@@ -46,13 +46,16 @@ type MainPagePropsType = {
 }
 
 export function MainPage(props:MainPagePropsType){
-  const thisTheme = createTheme({
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const thisTheme = createTheme({
     palette: {
       mode: props.mode,
     },
   });
+    if (!isLoggedIn) {return <Navigate to = 'login'/>};
   return(
       <ThemeProvider theme={thisTheme}>
+          <ErrorSnackbar/>
         <Box bgcolor={"background.default"} color={"text.primary"}>
           <Navbar />
       <Stack direction="row" spacing={2} justifyContent="space-between">

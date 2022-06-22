@@ -51,6 +51,7 @@ const UserBox = styled(Box)(({theme}) => ({
 export default function Navbar() {
     const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const navigate = useNavigate()
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
