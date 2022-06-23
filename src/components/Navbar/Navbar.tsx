@@ -11,12 +11,13 @@ import Tooltip from '@mui/material/Tooltip';
 import PersonAdd from '@mui/icons-material/PersonAdd';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
-import {AppBar, Badge, InputBase, styled, Toolbar} from "@mui/material";
+import {AppBar, Badge, Button, InputBase, styled, Toolbar} from "@mui/material";
 import {Mail, Pets, Notifications} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logoutTC} from "../../store/app-reducer";
 import {useAppDispatch} from "../../store/hooks";
+import {requestUsersTC} from "../../store/users-reducer";
 
 const StyledToolbar = styled(Toolbar)({
     display: "flex",
@@ -68,7 +69,9 @@ export default function Navbar() {
                 <Pets sx={{display: {xs: "block", sm: "none"}}}/>
                 <Search>
                     <InputBase placeholder="search..."/>
+
                 </Search>
+                <Button  variant="contained" onClick={()=>{dispatch(requestUsersTC() as any)}}>Search</Button>
                 <Icons>
                     <Badge badgeContent={4} color="error">
                         <Mail/>

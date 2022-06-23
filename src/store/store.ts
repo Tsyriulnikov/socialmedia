@@ -2,12 +2,14 @@ import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import {authReducer} from "./login-reducer";
 import {appReducer} from "./app-reducer";
+import {usersReducer} from "./users-reducer";
 
 // объединяя reducer-ы с помощью combineReducers,
 // мы задаём структуру нашего единственного объекта-состояния
 const rootReducer = combineReducers({
     app: appReducer,
-    login:authReducer
+    login:authReducer,
+    usersPage: usersReducer,
 })
 
 //Для DEVTools  Redux
