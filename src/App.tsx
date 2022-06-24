@@ -11,60 +11,68 @@ import Error404 from "./Page-not-found/Error404";
 import {useAppDispatch, useAppSelector} from "./store/hooks";
 import {initializeAppTC} from "./store/app-reducer";
 import {ErrorSnackbar} from "./components/ErrorSnackbar/ErrorSnackbar";
+import {Users} from "./components/Users/Users";
 
 
-export type ThemeType = "dark"|"light"
+export type ThemeType = "dark" | "light"
 
 function App() {
-  const [mode, setMode] = useState<ThemeType>("light");
+    const [mode, setMode] = useState<ThemeType>("light");
     const dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
-    useEffect(()=>{dispatch(initializeAppTC() as any)},[])
+    useEffect(() => {
+        dispatch(initializeAppTC() as any)
+    }, [])
     if (!isInitialized) {
         return (
             <div
-                style={{position: 'fixed', top: '30%', textAlign:'center', width: '100%'}}>
+                style={{position: 'fixed', top: '30%', textAlign: 'center', width: '100%'}}>
                 <CircularProgress/>
             </div>)
-    };
+    }
+    ;
 
-  return (
+    return (
 
-            <Routes>
+        <Routes>
             <Route path={"/"} element={<MainPage setMode={setMode} mode={mode}/>}/>
             <Route path={"login"} element={<Login/>}/>
             <Route path={'/404'} element={<Error404/>}/>
             <Route path={'*'} element={<Navigate to="/404"/>}/>
-          </Routes>
-  );
+        </Routes>
+    );
 }
 
 export default App;
 type MainPagePropsType = {
-  mode:ThemeType
-  setMode:(modeTheme:ThemeType) => void
+    mode: ThemeType
+    setMode: (modeTheme: ThemeType) => void
 }
 
-export function MainPage(props:MainPagePropsType){
+export function MainPage(props: MainPagePropsType) {
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
     const thisTheme = createTheme({
-    palette: {
-      mode: props.mode,
-    },
-  });
-    if (!isLoggedIn) {return <Navigate to = 'login'/>};
-  return(
-      <ThemeProvider theme={thisTheme}>
-          <ErrorSnackbar/>
-        <Box bgcolor={"background.default"} color={"text.primary"}>
-          <Navbar />
-      <Stack direction="row" spacing={2} justifyContent="space-between">
-    <Sidebar setMode={props.setMode} mode={props.mode}/>
-    <Feed />
-    <Rightbar />
-    <Add />
-  </Stack>
-        </Box>
-      </ThemeProvider>
-  )
+        palette: {
+            mode: props.mode,
+        },
+    });
+    if (!isLoggedIn) {
+        return <Navigate to='login'/>
+    }
+    ;
+    return (
+        <ThemeProvider theme={thisTheme}>
+            <ErrorSnackbar/>
+            <Box bgcolor={"background.default"} color={"text.primary"}>
+                <Navbar/>
+                <Stack direction="row" spacing={2} justifyContent="space-between">
+                    <Sidebar setMode={props.setMode} mode={props.mode}/>
+                    {/*<Users />*/}
+                    <Feed/>
+                    <Rightbar/>
+                    <Add/>
+                </Stack>
+            </Box>
+        </ThemeProvider>
+    )
 }
