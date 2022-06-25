@@ -27,7 +27,19 @@ type SideBarPropsType = {
 
 const Sidebar = (props:SideBarPropsType) => {
   return (
-    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+    // <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+    <Box sx={{
+      display: 'flex',
+      width: '100%',
+      height:'100vh',
+      alignItems: 'flex-start',
+      justifyContent: 'center',
+      bgcolor: 'background.default',
+      color: 'text.primary',
+      borderRadius: 1,
+      p: 3,
+
+    }}>
        <Box position="fixed">
         <List>
           <ListItem disablePadding>

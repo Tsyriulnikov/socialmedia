@@ -15,42 +15,33 @@ import {
 } from '@mui/material';
 import {useAppSelector} from "../../store/hooks";
 import {UserType} from "../../types/types";
-
+import avatarProfile from "../../assets/images/Avatar-Profile.png"
 export const Users: FC = () => {
     const users = useAppSelector(state => state.usersPage.users)
-
+    const handleChangePage = (event: unknown, newPage: number) => {
+        // setPage(newPage);
+    };
     return (
         <Card>
             <PerfectScrollbar>
-                <Box sx={{ minWidth: 1050 }}>
+                <Box  sx={{
+                    display: 'flex',
+                    width: '100%',
+                   alignItem:'flex-start',
+                    justifyContent: 'start',
+                    bgcolor: 'background.default',
+                    color: 'text.primary',
+                    borderRadius: 3,
+
+
+                }}>
+                <Box sx={{ minWidth: '100px' }}>
+
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <TableCell padding="checkbox">
-                                    {/*<Checkbox*/}
-                                    {/*    checked={selectedCustomerIds.length === customers.length}*/}
-                                    {/*    color="primary"*/}
-                                    {/*    indeterminate={*/}
-                                    {/*        selectedCustomerIds.length > 0*/}
-                                    {/*        && selectedCustomerIds.length < customers.length*/}
-                                    {/*    }*/}
-                                    {/*    onChange={handleSelectAll}*/}
-                                    {/*/>*/}
-                                </TableCell>
-                                <TableCell>
+                                 <TableCell>
                                     Name
-                                </TableCell>
-                                <TableCell>
-                                    Email
-                                </TableCell>
-                                <TableCell>
-                                    Location
-                                </TableCell>
-                                <TableCell>
-                                    Phone
-                                </TableCell>
-                                <TableCell>
-                                    Registration date
                                 </TableCell>
                             </TableRow>
                         </TableHead>
@@ -61,13 +52,7 @@ export const Users: FC = () => {
                                     key={customer.id}
                                     // selected={selectedCustomerIds.indexOf(customer.id) !== -1}
                                 >
-                                    <TableCell padding="checkbox">
-                                        {/*<Checkbox*/}
-                                        {/*    checked={selectedCustomerIds.indexOf(customer.id) !== -1}*/}
-                                        {/*    onChange={(event) => handleSelectOne(event, customer.id)}*/}
-                                        {/*    value="true"*/}
-                                        {/*/>*/}
-                                    </TableCell>
+
                                     <TableCell>
                                         <Box
                                             sx={{
@@ -75,12 +60,12 @@ export const Users: FC = () => {
                                                 display: 'flex'
                                             }}
                                         >
-                                            {/*<Avatar*/}
-                                            {/*    src={customer.avatarUrl}*/}
-                                            {/*    sx={{ mr: 2 }}*/}
-                                            {/*>*/}
-                                            {/*    {getInitials(customer.name)}*/}
-                                            {/*</Avatar>*/}
+                                            <Avatar
+                                                src= {customer.photos.small ? customer.photos.small : avatarProfile }
+                                                sx={{ mr: 2 }}
+                                            />
+
+
                                             <Typography
                                                 color="textPrimary"
                                                 variant="body1"
@@ -106,14 +91,17 @@ export const Users: FC = () => {
                         </TableBody>
                     </Table>
                 </Box>
+                </Box>
             </PerfectScrollbar>
             {/*<TablePagination*/}
             {/*    component="div"*/}
-            {/*    count={customers.length}*/}
-            {/*    onPageChange={handlePageChange}*/}
-            {/*    onRowsPerPageChange={handleLimitChange}*/}
-            {/*    page={page}*/}
-            {/*    rowsPerPage={limit}*/}
+            {/*    // count={customers.length}*/}
+            {/*    count={10}*/}
+            {/*    // onPageChange={handlePageChange}*/}
+            {/*    onPageChange={handleChangePage}*/}
+            {/*    // onRowsPerPageChange={handleLimitChange}*/}
+            {/*    page={9}*/}
+            {/*    rowsPerPage={10}*/}
             {/*    rowsPerPageOptions={[5, 10, 25]}*/}
             {/*/>*/}
         </Card>

@@ -4,7 +4,7 @@ import Rightbar from "./components/Rightbar/Rightbar";
 import {Box, CircularProgress, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Add from "./components/Add/Add";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Routes, Route, Navigate, useNavigate} from 'react-router-dom'
 import {Login} from "./components/Login/Login";
 import Error404 from "./Page-not-found/Error404";
@@ -19,9 +19,11 @@ import Grid from "@mui/material/Grid";
 export type ThemeType = "dark" | "light"
 
 function App() {
-    const [mode, setMode] = useState<ThemeType>("light");
+    // const [mode, setMode] = useState<ThemeType>("light");
     const dispatch = useAppDispatch()
     const isInitialized = useAppSelector(state => state.app.isInitialized)
+    // const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+
     useEffect(() => {
         dispatch(initializeAppTC() as any)
     }, [])
@@ -33,75 +35,101 @@ function App() {
             </div>)
     }
     ;
+    // const thisTheme = createTheme({
+    //     palette: {
+    //         mode: mode,
+    //     },
+    // });
+
+
+    return (
+
+        <Routes>
+            <Route path={"/"} element={<MainPage/>}/>
+            <Route path={"login"} element={<Login/>}/>
+            <Route path={'/404'} element={<Error404/>}/>
+            <Route path={'*'} element={<Navigate to="/404"/>}/>
+        </Routes>
+
+
+    );
+}
+
+export default App;
+
+export function MainPage() {
+    const [mode, setMode] = useState<ThemeType>("light");
+    const dispatch = useAppDispatch()
+    // const isInitialized = useAppSelector(state => state.app.isInitialized)
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+
     const thisTheme = createTheme({
         palette: {
             mode: mode,
         },
     });
+
+    if (!isLoggedIn) {
+        return <Navigate to='login'/>
+    }
+    ;
     return (
         <ThemeProvider theme={thisTheme}>
-           {/*<Box>*/}
-               <Navbar/>
-           {/*</Box>*/}
+<Navbar/>
+            <Box bgcolor={"background.default"} color={"text.primary"} >
+            {/*<Box   sx={{*/}
+            {/*    display: 'flex',*/}
+            {/*    width: '100%',*/}
+            {/*    height:'100%',*/}
+            {/*    alignItems: 'center',*/}
+            {/*    justifyContent: 'center',*/}
+            {/*    bgcolor: 'background.default',*/}
+            {/*    color: 'text.primary',*/}
+            {/*    borderRadius: 1,*/}
+            {/*    p: 3,*/}
+            {/*}} >*/}
 
-            <Routes>
-            <Route path={"/"} element={<MainPage setMode={setMode} mode={mode} cargo={'Feed'}/>}/>
-            <Route path={"/users"} element={<MainPage setMode={setMode} mode={mode} cargo={'Users'}/>}/>
-            <Route path={"login"} element={<Login/>}/>
-            <Route path={'/404'} element={<Error404/>}/>
-            <Route path={'*'} element={<Navigate to="/404"/>}/>
-        </Routes>
+                <Box>
+                    <Grid container spacing={2}>
+                        {/*<Grid item xs={2}>*/}
+                        <Grid item xs={2}>
+                            {/*<Stack direction="row" spacing={2}>*/}
+                       <Box  sx={{display: 'flex',
+                           width: '100%',
+                           alignItem:'flex-start',
+                           justifyContent: 'start',
+                           bgcolor: 'background.default',
+                           color: 'text.primary',
+                           borderRadius: 3,
+                       }}>
+                            <Sidebar setMode={setMode} mode={mode}/>
+                       </Box>
+                        </Grid>
+                        <Grid item xs={7}>
+                            <Box sx={{
+                                display: 'flex',
+                                width: '100%',
+                                alignItem:'flex-start',
+                                justifyContent: 'start',
+                                bgcolor: 'background.default',
+                                color: 'text.primary',
+                                borderRadius: 3,
+                            }}>
+
+                            {/*<Feed/>*/}
+                                <Users/>
+                            </Box>
+
+                        </Grid>
+                        <Grid item xs={3}>
+                            <Rightbar/>
+                        </Grid>
+                    </Grid>
+                    <Add/>
+                </Box>
+            </Box>
+
+
         </ThemeProvider>
     );
-}
-
-export default App;
-type MainPagePropsType = {
-    mode: ThemeType
-    setMode: (modeTheme: ThemeType) => void
-    cargo:string
-}
-
-export function MainPage(props: MainPagePropsType) {
-const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-// const thisTheme = createTheme({
-//     palette: {
-//         mode: props.mode,
-//     },
-// });
-if (!isLoggedIn) {
-    return <Navigate to='login'/>
-}
-;
-return (
-     // <ThemeProvider theme={thisTheme}>
-       <>
-        <ErrorSnackbar/>
-        <Box bgcolor={"background.default"} color={"text.primary"}>
-            {/*<Navbar/>*/}
-            {/*<Stack direction="row" spacing={2} justifyContent="space-between">*/}
-
-            <Box sx={{flexGrow: 1}}>
-                <Grid container spacing={2}>
-                    <Grid item xs={3}>
-                        {/*<Stack direction="row" spacing={2}>*/}
-                        <Sidebar setMode={props.setMode} mode={props.mode}/>
-                    </Grid>
-                    {/*<Users />*/}
-                    <Grid item xs={6}>
-                        {props.cargo === 'Feed' && <Feed/> }
-                        {props.cargo === 'Users' && <Users/> }
-                         {/*<Feed/>*/}
-                    </Grid>
-                    <Grid item xs={3}>
-                        <Rightbar/>
-                    </Grid>
-                </Grid>
-                <Add/>
-                {/*</Stack>*/}
-            </Box>
-        </Box>
-     {/*</ThemeProvider>*/}
-</>
-)
 }
