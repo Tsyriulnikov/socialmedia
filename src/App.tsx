@@ -77,17 +77,6 @@ export function MainPage() {
         <ThemeProvider theme={thisTheme}>
 <Navbar/>
             <Box bgcolor={"background.default"} color={"text.primary"} >
-            {/*<Box   sx={{*/}
-            {/*    display: 'flex',*/}
-            {/*    width: '100%',*/}
-            {/*    height:'100%',*/}
-            {/*    alignItems: 'center',*/}
-            {/*    justifyContent: 'center',*/}
-            {/*    bgcolor: 'background.default',*/}
-            {/*    color: 'text.primary',*/}
-            {/*    borderRadius: 1,*/}
-            {/*    p: 3,*/}
-            {/*}} >*/}
 
                 <Box>
                     <Grid container spacing={2}>
@@ -116,8 +105,8 @@ export function MainPage() {
                                 borderRadius: 3,
                             }}>
 
-                            {/*<Feed/>*/}
-                                <Users/>
+                            <Feed/>
+                                {/*<Users/>*/}
                             </Box>
 
                         </Grid>

@@ -3,10 +3,11 @@ import React, { useState } from "react";
 import Post from "../Post/Post";
 import {useAppSelector} from "../../store/hooks";
 import {Navigate} from "react-router-dom";
+import {Users} from "../Users/Users";
 
 const Feed = () => {
   // const [loading, setLoading] = useState(true);
-const loading=true
+// const loading=true
   // setTimeout(() => {
   //   setLoading(false);
   // }, [3000]);
@@ -15,9 +16,10 @@ const loading=true
   //   return <Navigate to='login'/>
   // }
   // ;
+  const isInitialized = useAppSelector(state => state.login.isLoggedIn)
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
-      {loading ? (
+      {!isInitialized ? (
         <Stack spacing={1}>
           <Skeleton variant="text" height={100} />
           <Skeleton variant="text" height={20} />
@@ -26,7 +28,7 @@ const loading=true
         </Stack>
       ) : (
         <>
-          <Post />
+          {/*<Users />*/}
           <Post />
           <Post />
           <Post />
