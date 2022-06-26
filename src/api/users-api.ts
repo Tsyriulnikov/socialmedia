@@ -2,8 +2,9 @@ import {GetItemsType, instance, APIResponseType} from './api-create';
 
 
 export const usersAPI = {
-    getUsers(currentPage = 1, pageSize = 10, term: string = '', friend: null | boolean = null) {
-        return instance.get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`) )
+    getUsers(currentPage:number, pageSize = 10, term: string = 'Max', friend: null | boolean = null) {
+        let currentPagePlus=currentPage+1
+        return instance.get<GetItemsType>(`users?page=${currentPagePlus}&count=${pageSize}&term=${term}` + (friend === null ? '' : `&friend=${friend}`) )
             .then(res => res.data)
     },
     follow(userId: number) {

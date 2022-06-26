@@ -11,7 +11,7 @@ let initialState = {
     users: [] as Array<UserType>,
     pageSize: 10,
     totalUsersCount: 0,
-    currentPage: 1,
+    currentPage: 0,
     isFetching: true,
     followingInProgress: [] as Array<number>, //array of users ids,
     filter: {
@@ -90,11 +90,13 @@ export const actions = {
 
 //TC
 
-export const requestUsersTC = () => (dispatch:AppDispatch) =>{
+export const requestUsersTC = (currentPage:number) => (dispatch:AppDispatch) =>{
         dispatch(setAppStatusAC('loading'))
-        usersAPI.getUsers()
+        dispatch(actions.setCurrentPage(currentPage))
+    usersAPI.getUsers(currentPage)
             .then((res) => {
                 dispatch(actions.setUsers(res.items))
+                dispatch(actions.setTotalUsersCount(res.totalCount))
                 dispatch(setAppStatusAC('succeeded'))
             })
     }

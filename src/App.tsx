@@ -58,6 +58,7 @@ function App() {
 export default App;
 
 export function MainPage() {
+
     const [mode, setMode] = useState<ThemeType>("light");
     const dispatch = useAppDispatch()
     // const isInitialized = useAppSelector(state => state.app.isInitialized)
@@ -75,38 +76,40 @@ export function MainPage() {
     ;
     return (
         <ThemeProvider theme={thisTheme}>
-<Navbar/>
-            <Box bgcolor={"background.default"} color={"text.primary"} >
+            <ErrorSnackbar/>
+            <Navbar/>
+            <Box bgcolor={"background.default"} color={"text.primary"}>
 
                 <Box>
                     <Grid container spacing={2}>
                         {/*<Grid item xs={2}>*/}
                         <Grid item xs={2}>
                             {/*<Stack direction="row" spacing={2}>*/}
-                       <Box  sx={{display: 'flex',
-                           width: '100%',
-                           alignItem:'flex-start',
-                           justifyContent: 'start',
-                           bgcolor: 'background.default',
-                           color: 'text.primary',
-                           borderRadius: 3,
-                       }}>
-                            <Sidebar setMode={setMode} mode={mode}/>
-                       </Box>
+                            <Box sx={{
+                                display: 'flex',
+                                width: '100%',
+                                alignItem: 'flex-start',
+                                justifyContent: 'start',
+                                bgcolor: 'background.default',
+                                color: 'text.primary',
+                                borderRadius: 3,
+                            }}>
+                                <Sidebar setMode={setMode} mode={mode}/>
+                            </Box>
                         </Grid>
                         <Grid item xs={7}>
                             <Box sx={{
                                 display: 'flex',
                                 width: '100%',
-                                alignItem:'flex-start',
+                                alignItem: 'flex-start',
                                 justifyContent: 'start',
                                 bgcolor: 'background.default',
                                 color: 'text.primary',
                                 borderRadius: 3,
                             }}>
 
-                            <Feed/>
-                                {/*<Users/>*/}
+                                {/*<Feed/>*/}
+                                <Users/>
                             </Box>
 
                         </Grid>

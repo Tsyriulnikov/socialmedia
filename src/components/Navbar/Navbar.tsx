@@ -16,7 +16,7 @@ import {Mail, Pets, Notifications} from "@mui/icons-material";
 import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {logoutTC} from "../../store/app-reducer";
-import {useAppDispatch} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {requestUsersTC} from "../../store/users-reducer";
 
 const StyledToolbar = styled(Toolbar)({
@@ -52,6 +52,7 @@ const UserBox = styled(Box)(({theme}) => ({
 export default function Navbar() {
     const dispatch = useAppDispatch()
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const currentPage = useAppSelector(state => state.usersPage.currentPage)
     const navigate = useNavigate()
     const open = Boolean(anchorEl);
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
@@ -71,7 +72,7 @@ export default function Navbar() {
                     <InputBase placeholder="search..."/>
 
                 </Search>
-                <Button  variant="contained" onClick={()=>{dispatch(requestUsersTC() as any)}}>Search</Button>
+                <Button  variant="contained" onClick={()=>{dispatch(requestUsersTC(0) as any)}}>Search</Button>
                 <Icons>
                     <Badge badgeContent={4} color="error">
                         <Mail/>

@@ -13,16 +13,25 @@ import {
     TableRow,
     Typography
 } from '@mui/material';
-import {useAppSelector} from "../../store/hooks";
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {UserType} from "../../types/types";
 import avatarProfile from "../../assets/images/Avatar-Profile.png"
+import {ErrorSnackbar} from "../ErrorSnackbar/ErrorSnackbar";
+import {requestUsersTC} from "../../store/users-reducer";
 export const Users: FC = () => {
+    const dispatch = useAppDispatch()
     const users = useAppSelector(state => state.usersPage.users)
+    const totalUsersCount = useAppSelector(state => state.usersPage.totalUsersCount)
+    const pageSize = useAppSelector(state => state.usersPage.pageSize)
+    const currentPage = useAppSelector(state => state.usersPage.currentPage)
+
     const handleChangePage = (event: unknown, newPage: number) => {
-        // setPage(newPage);
+        dispatch(requestUsersTC(newPage) as any);
     };
+
     return (
         <Card>
+            <ErrorSnackbar/>
             <PerfectScrollbar>
                 <Box  sx={{
                     display: 'flex',
@@ -93,17 +102,15 @@ export const Users: FC = () => {
                 </Box>
                 </Box>
             </PerfectScrollbar>
-            {/*<TablePagination*/}
-            {/*    component="div"*/}
-            {/*    // count={customers.length}*/}
-            {/*    count={10}*/}
-            {/*    // onPageChange={handlePageChange}*/}
-            {/*    onPageChange={handleChangePage}*/}
-            {/*    // onRowsPerPageChange={handleLimitChange}*/}
-            {/*    page={9}*/}
-            {/*    rowsPerPage={10}*/}
-            {/*    rowsPerPageOptions={[5, 10, 25]}*/}
-            {/*/>*/}
+            <TablePagination
+
+                rowsPerPageOptions={[10]}
+                component="div"
+                count={totalUsersCount}
+                rowsPerPage={10}
+                page={currentPage}
+                onPageChange={handleChangePage}
+                />
         </Card>
     );
 }

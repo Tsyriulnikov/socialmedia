@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import React from "react";
 import {ThemeType} from "../../App";
+import {Users} from "../Users/Users";
 
 type SideBarPropsType = {
   mode:ThemeType
@@ -51,11 +52,12 @@ const Sidebar = (props:SideBarPropsType) => {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#simple-list">
+            {/*<ListItemButton onClick=(()=>dispatch(setMenuItemAC('users')))> */}
+            <ListItemButton component="a" href="#users">
               <ListItemIcon>
-                <Article />
+                <Article/>
               </ListItemIcon>
-              <ListItemText primary="Pages" />
+              <ListItemText primary="Users" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
