@@ -1,7 +1,7 @@
 import Sidebar from "./components/Sidebar/Sidebar";
 import Feed from "./components/Feed/Feed";
 import Rightbar from "./components/Rightbar/Rightbar";
-import {Box, CircularProgress, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
+import {Box, Card, CircularProgress, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Add from "./components/Add/Add";
 import React, {useEffect, useState} from "react";
@@ -82,9 +82,9 @@ export function MainPage() {
 
                 <Box>
                     <Grid container spacing={2}>
-                        {/*<Grid item xs={2}>*/}
+
                         <Grid item xs={2}>
-                            {/*<Stack direction="row" spacing={2}>*/}
+
                             <Box sx={{
                                 display: 'flex',
                                 width: '100%',
@@ -94,6 +94,7 @@ export function MainPage() {
                                 color: 'text.primary',
                                 borderRadius: 3,
                             }}>
+
                                 <Sidebar setMode={setMode} mode={mode}/>
                             </Box>
                         </Grid>

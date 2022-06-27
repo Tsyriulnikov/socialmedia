@@ -9,7 +9,7 @@ import {
   Storefront,
 } from "@mui/icons-material";
 import {
-  Box,
+  Box, Card, CardContent,
   List,
   ListItem,
   ListItemButton,
@@ -29,6 +29,8 @@ type SideBarPropsType = {
 const Sidebar = (props:SideBarPropsType) => {
   return (
     // <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+
+
     <Box sx={{
       display: 'flex',
       width: '100%',
@@ -42,7 +44,9 @@ const Sidebar = (props:SideBarPropsType) => {
 
     }}>
        <Box position="fixed">
-        <List>
+         <Card variant="outlined">
+        <CardContent>
+         <List>
           <ListItem disablePadding>
             <ListItemButton component="a" href="#home">
               <ListItemIcon>
@@ -109,6 +113,8 @@ const Sidebar = (props:SideBarPropsType) => {
             </ListItemButton>
           </ListItem>
         </List>
+        </CardContent>
+         </Card>
       </Box>
     </Box>
   );
