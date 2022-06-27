@@ -31,8 +31,8 @@ const Sidebar = (props:SideBarPropsType) => {
     // <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
 
 
-    <Box sx={{
-      display: 'flex',
+    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" },
+      // display: 'flex',
       width: '100%',
       height:'100vh',
       alignItems: 'flex-start',
@@ -44,7 +44,7 @@ const Sidebar = (props:SideBarPropsType) => {
 
     }}>
        <Box position="fixed">
-         <Card variant="outlined">
+         <Card variant="outlined" sx={{borderRadius:'10%'}}>
         <CardContent>
          <List>
           <ListItem disablePadding>

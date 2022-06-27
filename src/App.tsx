@@ -81,6 +81,7 @@ export function MainPage() {
             <Box bgcolor={"background.default"} color={"text.primary"}>
 
                 <Box>
+
                     <Grid container spacing={2}>
 
                         <Grid item xs={2}>
