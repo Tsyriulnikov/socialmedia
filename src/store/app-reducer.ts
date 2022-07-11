@@ -7,6 +7,7 @@ const initialState: InitialStateType = {
     status: 'idle',
     error: null,
     isInitialized: false,
+    itemsShow: 'home'
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -17,28 +18,35 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {...state, error: action.error}
         case "APP/SET-INITIALIZED":
             return {...state, isInitialized: action.isInitialized}
+        case "APP/SET-ITEMS-SHOW":
+            return {...state, itemsShow: action.itemsShow}
         default:
             return {...state}
     }
 }
 
 export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
+export type ItemsShowType = 'home' | 'users'
+
 export type InitialStateType = {
     // происходит ли сейчас взаимодействие с сервером
     status: RequestStatusType
     // если ошибка какая-то глобальная произойдёт - мы запишем текст ошибки сюда
     error: string | null
     isInitialized: boolean
+    itemsShow: ItemsShowType
 }
 //AC
 export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
 export const setAppStatusAC = (status: RequestStatusType) => ({type: 'APP/SET-STATUS', status} as const)
 export const setInitializedAC = (isInitialized: boolean) => ({type: 'APP/SET-INITIALIZED', isInitialized} as const)
+export const setItemsShowAC = (itemsShow: ItemsShowType) => ({type: 'APP/SET-ITEMS-SHOW', itemsShow} as const)
 
 export type SetAppErrorActionType = ReturnType<typeof setAppErrorAC>
 export type SetAppStatusActionType = ReturnType<typeof setAppStatusAC>
 export type SetInitializedActionType = ReturnType<typeof setInitializedAC>
 export type setIsLoggedInActionType = ReturnType<typeof setIsLoggedInAC>
+export type setItemsShowActionType = ReturnType<typeof setItemsShowAC>
 
 
 //TS
@@ -82,3 +90,4 @@ export type ActionsType =
     | SetAppStatusActionType
     | SetInitializedActionType
     | setIsLoggedInActionType
+    | setItemsShowActionType

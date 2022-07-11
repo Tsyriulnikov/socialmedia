@@ -63,6 +63,7 @@ export function MainPage() {
     const dispatch = useAppDispatch()
     // const isInitialized = useAppSelector(state => state.app.isInitialized)
     const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+    const showItems = useAppSelector(state => state.app.itemsShow)
 
     const thisTheme = createTheme({
         palette: {
@@ -78,13 +79,21 @@ export function MainPage() {
         <ThemeProvider theme={thisTheme}>
             <ErrorSnackbar/>
             <Navbar/>
-            <Box bgcolor={"background.default"} color={"text.primary"}>
 
-                <Box>
+            {/*<Box bgcolor={"background.default"} color={"text.primary"}>*/}
 
-                    <Grid container spacing={2}>
+                <Box sx={{
+                    display: 'flex',
+                    width: '100vh',
+                    justifyContent: 'space-around',
+                    bgcolor: 'background.default',
+                    color: 'text.primary',
+                    borderRadius: 3,
+                }}>
 
-                        <Grid item xs={2}>
+                    {/*<Grid container spacing={2}>*/}
+
+                        {/*<Grid item xs={2}>*/}
 
                             <Box sx={{
                                 display: 'flex',
@@ -98,30 +107,29 @@ export function MainPage() {
 
                                 <Sidebar setMode={setMode} mode={mode}/>
                             </Box>
-                        </Grid>
-                        <Grid item xs={7}>
+                        {/*</Grid>*/}
+                        {/*<Grid item xs={7}>*/}
                             <Box sx={{
                                 display: 'flex',
-                                width: '100%',
+                                width: '100vh',
                                 alignItem: 'flex-start',
                                 justifyContent: 'start',
                                 bgcolor: 'background.default',
                                 color: 'text.primary',
                                 borderRadius: 3,
                             }}>
-
-                                {/*<Feed/>*/}
-                                <Users/>
+                                {showItems === 'home' && <Feed/>}
+                                {showItems === 'users'&& <Users/>}
                             </Box>
 
-                        </Grid>
-                        <Grid item xs={3}>
+                        {/*</Grid>*/}
+                        {/*<Grid item xs={3}>*/}
                             <Rightbar/>
-                        </Grid>
-                    </Grid>
+                        {/*</Grid>*/}
+                    {/*</Grid>*/}
                     <Add/>
                 </Box>
-            </Box>
+            {/*</Box>*/}
 
 
         </ThemeProvider>

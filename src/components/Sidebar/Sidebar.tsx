@@ -20,6 +20,8 @@ import {
 import React from "react";
 import {ThemeType} from "../../App";
 import {Users} from "../Users/Users";
+import {useAppDispatch} from "../../store/hooks";
+import {ItemsShowType, setItemsShowAC} from "../../store/app-reducer";
 
 type SideBarPropsType = {
   mode:ThemeType
@@ -27,6 +29,11 @@ type SideBarPropsType = {
 }
 
 const Sidebar = (props:SideBarPropsType) => {
+const dispatch = useAppDispatch()
+const handleClickMenu=(item:ItemsShowType)=>{
+    dispatch(setItemsShowAC(item) as any)
+
+    }
   return (
     // <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
 
@@ -48,7 +55,7 @@ const Sidebar = (props:SideBarPropsType) => {
         <CardContent>
          <List>
           <ListItem disablePadding>
-            <ListItemButton component="a" href="#home">
+            <ListItemButton component="a" href="#home" onClick={()=>handleClickMenu('home')}>
               <ListItemIcon>
                 <Home />
               </ListItemIcon>
@@ -57,7 +64,7 @@ const Sidebar = (props:SideBarPropsType) => {
           </ListItem>
           <ListItem disablePadding>
             {/*<ListItemButton onClick=(()=>dispatch(setMenuItemAC('users')))> */}
-            <ListItemButton component="a" href="#users">
+            <ListItemButton component="a" href="#users" onClick={()=>handleClickMenu('users')}>
               <ListItemIcon>
                 <Article/>
               </ListItemIcon>
