@@ -1,7 +1,17 @@
 import Sidebar from "./components/Sidebar/Sidebar";
 import Feed from "./components/Feed/Feed";
 import Rightbar from "./components/Rightbar/Rightbar";
-import {Box, Card, CircularProgress, createTheme, PaletteMode, Stack, ThemeProvider} from "@mui/material";
+import {
+    Box,
+    Card,
+    CircularProgress,
+    createTheme,
+    PaletteMode,
+    Paper,
+    Stack,
+    styled,
+    ThemeProvider
+} from "@mui/material";
 import Navbar from "./components/Navbar/Navbar";
 import Add from "./components/Add/Add";
 import React, {useEffect, useState} from "react";
@@ -75,63 +85,43 @@ export function MainPage() {
         return <Navigate to='login'/>
     }
     ;
+
+
+    const Item = styled(Paper)(({theme}) => ({
+        backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        ...theme.typography.body2,
+        padding: theme.spacing(1),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    }));
+
+
     return (
         <ThemeProvider theme={thisTheme}>
             <ErrorSnackbar/>
             <Navbar/>
 
-            {/*<Box bgcolor={"background.default"} color={"text.primary"}>*/}
-
-                <Box sx={{
-                    display: 'flex',
-                    flexDirection:'row',
-                    width: '100vh',
-                    height:'100%',
-                    justifyContent: 'space-around',
-                    bgcolor: 'background.default',
-                    color: 'text.primary',
-                    borderRadius: 3,
-                }}>
-
-                    {/*<Grid container spacing={2}>*/}
-
-                        {/*<Grid item xs={2}>*/}
-
-                            <Box sx={{
-                                display: 'flex',
-                                width: '100%',
-                                alignItem: 'flex-start',
-                                justifyContent: 'start',
-                                bgcolor: 'background.default',
-                                color: 'text.primary',
-                                borderRadius: 3,
-                            }}>
-
-                                <Sidebar setMode={setMode} mode={mode}/>
-                            </Box>
-                        {/*</Grid>*/}
-                        {/*<Grid item xs={7}>*/}
-                            <Box sx={{
-                                display: 'flex',
-                                width: '100vh',
-                                alignItem: 'flex-start',
-                                justifyContent: 'start',
-                                bgcolor: 'background.default',
-                                color: 'text.primary',
-                                borderRadius: 3,
-                            }}>
-                                {showItems === 'home' && <Feed/>}
-                                {showItems === 'users'&& <Users/>}
-                            </Box>
-
-                        {/*</Grid>*/}
-                        {/*<Grid item xs={3}>*/}
+            <Box sx={{flexGrow: 1 , bgcolor: 'background.default',minHeight:'100vl'}}>
+                <Grid container spacing={3}>
+                    <Grid item xs>
+                        {/*<Item>*/}
+                            <Sidebar setMode={setMode} mode={mode}/>
+                            <Add/>
+                        {/*</Item>*/}
+                    </Grid>
+                    <Grid item xs={6}>
+                        {/*<Item>*/}
+                            {showItems === 'home' && <Feed/>}
+                            {showItems === 'users'&& <Users/>}
+                        {/*</Item>*/}
+                    </Grid>
+                    <Grid item xs>
+                        {/*<Item>*/}
                             <Rightbar/>
-                        {/*</Grid>*/}
-                    {/*</Grid>*/}
-                    <Add/>
-                </Box>
-            {/*</Box>*/}
+                        {/*</Item>*/}
+                    </Grid>
+                </Grid>
+            </Box>
 
 
         </ThemeProvider>

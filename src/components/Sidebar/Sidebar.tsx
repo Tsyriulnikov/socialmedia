@@ -35,23 +35,9 @@ const handleClickMenu=(item:ItemsShowType)=>{
 
     }
   return (
-    // <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
-
-
-    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" },
-      // display: 'flex',
-      width: '100%',
-      height:'100vh',
-      alignItems: 'flex-start',
-      justifyContent: 'center',
-      bgcolor: 'background.default',
-      color: 'text.primary',
-      borderRadius: 1,
-      p: 3,
-
-    }}>
-       <Box position="fixed">
-         <Card variant="outlined" sx={{borderRadius:'10%'}}>
+    <Box flex={1} p={2} sx={{ display: { xs: "none", sm: "block" } }}>
+         <Box position="fixed" width={200}>
+         <Card variant="outlined" >
         <CardContent>
          <List>
           <ListItem disablePadding>
