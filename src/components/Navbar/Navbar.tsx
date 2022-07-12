@@ -68,11 +68,7 @@ export default function Navbar() {
                     Max Tsyriulnikov
                 </Typography>
                 <Pets sx={{display: {xs: "block", sm: "none"}}}/>
-                <Search>
-                    <InputBase placeholder="search..."/>
 
-                </Search>
-                <Button  variant="contained" onClick={()=>{dispatch(requestUsersTC(0) as any)}}>Search</Button>
                 <Icons>
                     <Badge badgeContent={4} color="error">
                         <Mail/>
