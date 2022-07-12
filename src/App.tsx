@@ -84,7 +84,9 @@ export function MainPage() {
 
                 <Box sx={{
                     display: 'flex',
+                    flexDirection:'row',
                     width: '100vh',
+                    height:'100%',
                     justifyContent: 'space-around',
                     bgcolor: 'background.default',
                     color: 'text.primary',
