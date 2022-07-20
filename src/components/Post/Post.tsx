@@ -13,7 +13,12 @@ import {
 const Post = () => {
   return (
     <Card sx={{ margin: 5 }}>
-
+      <CardHeader
+        avatar={
+          <Avatar sx={{ bgcolor: "red" }} aria-label="recipe">
+            R
+          </Avatar>
+        }
         action={
           <IconButton aria-label="settings">
             <MoreVert />
