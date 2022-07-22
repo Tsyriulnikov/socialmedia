@@ -58,7 +58,17 @@ export const Users: FC = () => {
             <Card>
                 <ErrorSnackbar/>
                 <PerfectScrollbar>
+                    <Box sx={{
+                        display: 'flex',
+                        width: '100%',
+                        alignItem: 'flex-start',
+                        justifyContent: 'start',
+                        bgcolor: 'background.default',
+                        color: 'text.primary',
+                        borderRadius: 3,
 
+
+                    }}>
                         <Box sx={{minWidth: '100px'}}>
 
                             <Table>
